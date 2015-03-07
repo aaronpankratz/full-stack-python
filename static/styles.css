@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+}
+h1, h2, h3, h4 {
+    color: #CCCCCC;
+}
+.flash {
+    background: #CEE5F5;
+    color: red;
+}
