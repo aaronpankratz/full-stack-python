@@ -24,7 +24,7 @@ def newMenutItem(restaurant_id):
         session.commit()
         return redirect(url_for('restaurantMenu', restaurant_id = restaurant_id))
     else:
-        return render_template(url_for('restaurantMenu', restaurant_id = restaurant_id)
+        return render_template('newmenuitem.html', restaurant_id = restaurant_id)
 
 @app.route('/restaurants/<int:restaurant_id>/menu/items/<int:menu_id>/edit/')
 def editMenuItem(restaurant_id, menu_id):
