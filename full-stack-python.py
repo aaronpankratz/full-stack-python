@@ -16,7 +16,7 @@ def restaurantMenu(restaurant_id):
     menu_items = session.query(MenuItem).filter_by(restaurant_id = restaurant.id)
     return render_template('menu.html', restaurant = restaurant, items = menu_items)
 
-@app.route('/restaurants/<int:restaurant_id>/menu/items/new/' methods=['GET', 'POST'])
+@app.route('/restaurants/<int:restaurant_id>/menu/items/new/', methods=['GET', 'POST'])
 def newMenutItem(restaurant_id):
     if request.method == 'POST':
         newItem = MenuItem(name = request.form['name'], restaurant_id=restaurant_id)
