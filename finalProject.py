@@ -53,6 +53,7 @@ def showMenu(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/new', methods=['GET', 'POST'])
 def newMenuItem(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     if request.method == 'GET':
         return render_template('createMenuItem.html', restaurant = restaurant)
     else:
@@ -63,6 +64,7 @@ def newMenuItem(restaurant_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit')
 def editMenuItem(restaurant_id, menu_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
     if request.method == 'GET':
         return render_template('editMenuItem.html', restaurant = restaurant)
@@ -75,6 +77,7 @@ def editMenuItem(restaurant_id, menu_id):
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete')
 def deleteMenuItem(restaurant_id, menu_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
     if request.method == 'GET':
         return render_template('deleteMenuItem.html', restaurant = restaurant)
