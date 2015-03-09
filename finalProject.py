@@ -15,9 +15,15 @@ def showRestaurants():
     restaurants = session.query(Restaurant).all();
     return render_template('restaurants.html', restaurants = restaurants)
 
-@app.route('/restaurants/new')
+@app.route('/restaurants/new', methods=['GET', 'POST'])
 def newRestaurant():
-    return render_template('createRestaurant.html')
+    if request.method == 'GET':
+        return render_template('createRestaurant.html')
+    else:
+        restaurant = Restaurant(name = request.form['name'])
+        session.add(restaurant)
+        session.commit()
+        return redirect(url_for('restaurants.html'))
 
 @app.route('/restaurants/<int:restaurant_id>/edit', methods=['GET', 'POST'])
 def editRestaurant(restaurant_id):
