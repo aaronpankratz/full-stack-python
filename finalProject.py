@@ -67,7 +67,7 @@ def editMenuItem(restaurant_id, menu_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
     if request.method == 'GET':
-        return render_template('editMenuItem.html', restaurant = restaurant)
+        return render_template('editMenuItem.html', restaurant = restaurant, item = menuItem)
     else:
         menuItem.name = request.form['name']
         menuItem.description = request.form['description']
@@ -80,7 +80,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     menuItem = session.query(MenuItem).filter_by(id = menu_id).one()
     if request.method == 'GET':
-        return render_template('deleteMenuItem.html', restaurant = restaurant)
+        return render_template('deleteMenuItem.html', restaurant = restaurant, item = menuItem)
     else:
         session.delete(menuItem)
         session.commit(menuItem)
