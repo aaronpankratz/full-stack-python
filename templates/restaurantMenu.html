@@ -1,5 +1,10 @@
 <html>
   <body>
-    <p>page to display restaurant {{restaurant.id}}'s menu</p>
+    <p>{{restaurant.name}}</p>
+    {% for item in items %}
+      <p class="name">{{item.name}}</p>
+      <p class="description">{{item.description}}</p>
+      <p class="price">{{item.price}}</p>
+    {% endfor %}
   </body>
 </html>
