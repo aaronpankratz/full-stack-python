@@ -1,5 +1,10 @@
 <html>
   <body>
-    <p>page to display all restaurants</p>
+    <p>Restaurants</p>
+    {% for restaurant in restaurants %}
+      <p class="restaurant_name">{{restaurant.name}}</p>
+      <a href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
+      <a href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
+    {% endfor %}
   </body>
 </html>
