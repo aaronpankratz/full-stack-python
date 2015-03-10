@@ -1,5 +1,14 @@
 <html>
   <body>
-    <p>page to create a new menu item for restaurant {{restaurant.id}}</p>
+    <h1>Create new menu item</h1>
+    <form action="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}" method="POST">
+      <p>Name:</p>
+      <input type="text" size="30" name="name">
+      <p>Description:</p>
+      <textarea type="text" cols="50" rows="5" name="description"></textarea>
+      <p>Price:</p>
+      <input type="text" size="10" name="price">
+      <input type="submit" value="Save">
+      <a href="{{url_for('showMenu', restaurant_id = restaurant.id)}}">Cancel</a>
   </body>
 </html>

@@ -57,9 +57,9 @@ def newMenuItem(restaurant_id):
     if request.method == 'GET':
         return render_template('createMenuItem.html', restaurant = restaurant)
     else:
-        menuItem = MenuItem(name = request.form['name'], description = request.form['description'], price = request.form['price'])
+        menuItem = MenuItem(restaurant_id = restaurant_id, name = request.form['name'], description = request.form['description'], price = request.form['price'])
         session.add(menuItem)
-        session.commit(menuItem)
+        session.commit()
         return redirect(url_for('showMenu', restaurant_id = restaurant_id))
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit')
