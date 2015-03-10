@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, redirect, request, jsonify
+from flask import Flask, render_template, url_for, redirect, request, jsonify, flash
 from database_setup import Base, Restaurant, MenuItem
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -23,6 +23,7 @@ def newRestaurant():
         restaurant = Restaurant(name = request.form['name'])
         session.add(restaurant)
         session.commit()
+        flash("New Restaurant Created")
         return redirect(url_for('showRestaurants'))
 
 @app.route('/restaurants/<int:restaurant_id>/edit', methods=['GET', 'POST'])
@@ -32,6 +33,7 @@ def editRestaurant(restaurant_id):
         return render_template('editRestaurant.html', restaurant = restaurant)
     else:
         restaurant.name = request.form['name']
+        flash("Restaurant Successfully Edited")
         session.commit()
         return redirect(url_for('showRestaurants'))
 
@@ -43,6 +45,7 @@ def deleteRestaurant(restaurant_id):
     else:
         session.delete(restaurant)
         session.commit()
+        flash("Restaurant Successfully Deleted")
         return redirect(url_for('showRestaurants'))
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
@@ -60,6 +63,7 @@ def newMenuItem(restaurant_id):
         menuItem = MenuItem(restaurant_id = restaurant_id, name = request.form['name'], description = request.form['description'], price = request.form['price'])
         session.add(menuItem)
         session.commit()
+        flash("Menu Item Created")
         return redirect(url_for('showMenu', restaurant_id = restaurant_id))
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/edit', methods=['GET', 'POST'])
@@ -73,6 +77,7 @@ def editMenuItem(restaurant_id, menu_id):
         menuItem.description = request.form['description']
         menuItem.price = request.form['price']
         session.commit()
+        flash("Menu Item Successfully Edited")
         return redirect(url_for('showMenu', restaurant_id = restaurant_id))
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/delete', methods=['GET', 'POST'])
@@ -84,6 +89,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     else:
         session.delete(menuItem)
         session.commit()
+        flash("Menu Item Successfully Deleted")
         return redirect(url_for('showMenu', restaurant_id = restaurant_id))
 
 @app.route('/restaurants/JSON')
