@@ -1,5 +1,11 @@
 <html>
   <body>
-    <p>page to create a restaurant</p>
+    <h1>Create a restaurant</h1>
+    <form action="{{url_for('newRestaurant')}}" method="POST">
+      <p>Name:</p>
+      <input type="text" size="30" name="name">
+      <input type="submit" value="Save">
+      <a href="{{url_for('showRestaurants')}}">Cancel</a>
+    </form>
   </body>
 </html>
