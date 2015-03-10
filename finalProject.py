@@ -42,7 +42,7 @@ def deleteRestaurant(restaurant_id):
         return render_template('deleteRestaurant.html', restaurant = restaurant)
     else:
         session.delete(restaurant)
-        sessiont.commit()
+        session.commit()
         return redirect(url_for('showRestaurants'))
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
