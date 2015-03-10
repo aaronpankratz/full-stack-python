@@ -32,7 +32,7 @@ def editRestaurant(restaurant_id):
         return render_template('editRestaurant.html', restaurant = restaurant)
     else:
         restaurant.name = request.form['name']
-        sessiont.commit()
+        session.commit()
         return redirect(url_for('showRestaurants'))
 
 @app.route('/restaurants/<int:restaurant_id>/delete', methods=['GET', 'POST'])
