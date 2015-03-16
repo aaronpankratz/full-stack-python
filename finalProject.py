@@ -108,5 +108,6 @@ def menuItemJSON(restaurant_id, menu_id):
     return jsonify(MenuItem=menuItem.serialize)
 
 if __name__ == '__main__':
+    app.secret_key = 'super secret key'
     app.debug = True
     app.run()
