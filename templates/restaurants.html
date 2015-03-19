@@ -31,38 +31,36 @@
       </div>
     </nav>
     <div class="container top-buffer">
-      <div class="container">
-        <!-- FLASH -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-          {% for message in messages %}
-          <li class='flash'><strong>{{message}}</strong></li>
+      <!-- FLASH -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+        <li class='flash'><strong>{{message}}</strong></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endwith %}
+      <table class="table table-striped">
+        <tbody>
+          {% for restaurant in restaurants %}
+          <tr class="row">
+            <td>
+              <p class="lead">{{restaurant.name}}</p>
+            </td>
+            <td>
+              <a href="{{url_for('showMenu', restaurant_id = restaurant.id)}}">Menu</a>
+            </td>
+            <td>
+              <a href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
+            </td>
+            <td>
+              <a href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
+            </td>
+          </tr>
           {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        <table class="table table-striped">
-          <tbody>
-            {% for restaurant in restaurants %}
-            <tr class="row">
-              <td>
-                <p class="lead">{{restaurant.name}}</p>
-              </td>
-              <td>
-                <a href="{{url_for('showMenu', restaurant_id = restaurant.id)}}">Menu</a>
-              </td>
-              <td>
-                <a href="{{url_for('editRestaurant', restaurant_id = restaurant.id)}}">Edit</a>
-              </td>
-              <td>
-                <a href="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">Delete</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
