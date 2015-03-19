@@ -1,28 +1,54 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" contents="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{restaurant.name}} Menu</title>
-    <link rel='stylesheet' type='text/css' href='{{url_for('static', filename='styles.css')}}'>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
   </head>
   <body>
-    <p>{{restaurant.name}}</p>
-    <!-- FLASH -->
-    {% with messages = get_flashed_messages() %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{{url_for('showRestaurants')}}">Restaurants</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Create Menu Item</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container top-buffer">
+      <p>{{restaurant.name}} Menu</p>
+      <!-- FLASH -->
+      {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li class='flash'><strong>{{message}}</strong></li>
-          {% endfor %}
-	</ul>
+      <ul>
+        {% for message in messages %}
+        <li class='flash'><strong>{{message}}</strong></li>
+        {% endfor %}
+      </ul>
       {% endif %}
-    {% endwith %}
-    <a href="{{url_for('newMenuItem', restaurant_id = restaurant.id)}}">Create new menu item</a>
-    <a href="{{url_for('showRestaurants')}}">Back to Restaurants</a>
-    {% for item in items %}
-    <p class="name">{{item.name}}</p>
-    <p class="description">{{item.description}}</p>
-    <p class="price">{{item.price}}</p>
-    <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Edit</a>
-    <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Delete</a>
-    {% endfor %}
+      {% endwith %}
+      {% for item in items %}
+      <p class="name">{{item.name}}</p>
+      <p class="description">{{item.description}}</p>
+      <p class="price">{{item.price}}</p>
+      <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Edit</a>
+      <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Delete</a>
+      {% endfor %}
+    </div>
   </body>
 </html>
