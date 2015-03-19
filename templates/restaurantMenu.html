@@ -31,7 +31,9 @@
       </div>
     </nav>
     <div class="container top-buffer">
-      <p>{{restaurant.name}} Menu</p>
+      <p class="lead">
+	<h1>{{restaurant.name}} Menu</h1>
+      </p>
       <!-- FLASH -->
       {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -42,13 +44,29 @@
       </ul>
       {% endif %}
       {% endwith %}
-      {% for item in items %}
-      <p class="name">{{item.name}}</p>
-      <p class="description">{{item.description}}</p>
-      <p class="price">{{item.price}}</p>
-      <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Edit</a>
-      <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Delete</a>
-      {% endfor %}
+      <table class="table table-striped">
+	<tbody>
+	  {% for item in items %}
+	  <tr class="row">
+	    <td>
+	      <p class="lead">{{item.name}}</p>
+	    </td>
+	    <td>
+	      <p class="lead">{{item.description}}</p>
+	    </td>
+	    <td>
+	      <p class="lead">{{item.price}}</p>
+	    </td>
+	    <td>
+	      <a href="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Edit</a>
+	    </td>
+	    <td>
+	      <a href="{{url_for('deleteMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}">Delete</a>
+	    </td>
+	  </tr>
+	  {% endfor %}
+        </tbody>
+      </table>
     </div>
   </body>
 </html>
