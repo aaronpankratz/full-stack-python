@@ -22,7 +22,14 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="{{url_for('showRestaurants')}}">Restaurants</a>
-        </div>
+	</div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li>
+	      <a href="{{url_for('showMenu', restaurant_id = restaurant.id)}}">{{restaurant.name}} Menu</a>
+	    </li>
+	  </ul>
+	</div>
       </div>
     </nav>
     <div class="container top-buffer">
