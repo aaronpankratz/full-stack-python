@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.css')}}">
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
-    <title>Create a Restaurants</title>
+    <title>Edit Menu Item</title>
   </head>
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
@@ -34,15 +34,21 @@
     </nav>
     <div class="container top-buffer">
       <h1>{{item.name}}</h1>
-      <form action="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}" method="POST">
-	<p>Name:</p>
-	<input type="text" size="30" name="name" value="{{item.name}}">
-	<p>Description:</p>
-	<textarea cols="50" rows="5" name="description">{{item.description}}</textarea>
-	<p>Price:</p>
-	<input type="text" size="10" name="price" value="{{item.price}}">
-	<input type="submit" value="save">
-	<a href="{{url_for('showMenu', restaurant_id = restaurant.id, menu_id = item.id)}}">Cancel</a>
+      <form role="form" action="{{url_for('editMenuItem', restaurant_id = restaurant.id, menu_id = item.id)}}" method="POST">
+	<div class="form-group">
+	  <label for="name">Name:</label>
+	  <input class="form-control" id="name" type="text" size="30" name="name" value="{{item.name}}">
+	</div>
+	<div class="form-group">
+	  <label for="description">Description:</label>
+	  <textarea class="form-control" id="description" cols="50" rows="5" name="description">{{item.description}}</textarea>
+	</div>
+	<div class="form-group">
+	  <label for="price">Price:</label>
+	  <input class="form-control" id="price" type="text" size="10" name="price" value="{{item.price}}">
+	</div>
+	<button class="btn btn-default"type="submit">Save</button>
+	<a class="btn btn-default" href="{{url_for('showMenu', restaurant_id = restaurant.id, menu_id = item.id)}}">Cancel</a>
       </form>
     </div>
   </body>
